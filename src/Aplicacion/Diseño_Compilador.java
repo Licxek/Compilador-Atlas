@@ -1260,28 +1260,37 @@ public class Diseño_Compilador extends javax.swing.JFrame
             Produccion81, Produccion82
         };
         
-         System.out.println("Producción " + Dato + ":");
-    if (Dato < Arreglo_prod.length && Dato >= 0) {
-        for (int j = 0; j < Arreglo_prod[Dato].length; j++) {
-            if (Arreglo_prod[Dato][j] != -1) {
-                System.out.print(Arreglo_prod[Dato][j] + " ");
-            } else {
-                System.out.print("ε "); // Representación del vacío
+         Stack<Integer> pila = new Stack<>();
+        int[] produccionSeleccionada = Arreglo_prod[Dato]; // Obtener la producción específica
+
+        // Vaciamos los elementos de la producción seleccionada en la pila (si no es vacía)
+        if (!contieneMil(produccionSeleccionada)) {
+            for (int i = produccionSeleccionada.length - 1; i >= 0; i--) {
+                pila.push(produccionSeleccionada[i]);
+            }
+
+            System.out.println("Elementos de la producción " + Dato + ":");
+            while (!pila.isEmpty()) {
+                System.out.println(pila.pop());
+            }
+        } else {
+            System.out.println("La producción " + Dato + " está vacía.");
+        }
+    
+    };
+
+    private static boolean contieneMil(int[] arreglo) 
+    {
+        for (int elemento : arreglo) 
+        {
+            if (elemento == 1000) 
+            {
+                return true;
             }
         }
-        System.out.println(); // Salto de línea al final
-    } else {
-        System.out.println("Dato fuera del rango.");
+        return false;
     }
-         //vacía en la pila, los elementos de la producción
-        for (int j = 0; j < Arreglo_prod[Dato].length; j++) 
-        {
-            if(Arreglo_prod[Dato][j] != -1)
-            {   //producciones con -1 son vacío, no se mete a la pila
-                pila.push(Arreglo_prod[Dato][j]);  
-            }                     
-        }
-    };
+
        
     private int TokenSintactico(int e) 
     {

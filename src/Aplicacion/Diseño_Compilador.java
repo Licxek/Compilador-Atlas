@@ -1283,7 +1283,7 @@ public class Diseño_Compilador extends javax.swing.JFrame
     {
         for (int elemento : arreglo) 
         {
-            if (elemento == 1000) 
+            if (elemento == -1) 
             {
                 return true;
             }
